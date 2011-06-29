@@ -1,0 +1,83 @@
+<div class="search">
+    <div class='left'>
+		<form action="selection-process/index/index" method="get" id='query'>
+			<span class="ui-icon ui-icon-search magnifier"></span>
+	        <input type="text" name="query" value="<?php echo $this->params['query']?>" />
+	        <input type="submit" value="<?php echo $this->translate('Search')?>" />
+	    </form>
+	</div>
+	<div style="margin-left:10px;" class='left'>
+		<form action='selection-process/index/index/' id='course-form' method='post'>
+			<label>
+				<?php echo $this->translate('list for course')?>:
+				<?php echo $this->formSelect('course', !empty($this->course_id)?$this->course_id:'', null, $this->courses)?>
+			</label>
+		</form>
+	</div>
+</div>
+<div class="clear">&nbsp;</div>
+<div>
+    <?php if (count($this->data)): ?>
+		<form action="selection-process/index/" method="post" id='pre-registration'>
+			<table class="datatable">
+		        <tr>
+		            <th><input type="checkbox" id="user-all"/></th>
+		            <th><?php echo $this->translate('Name')?></th>
+		            <th><?php echo $this->translate('Date')?></th>
+					<th><?php echo $this->translate('course')?></th>
+					<th><?php echo $this->translate('classroom')?></th>
+					<th><?php echo $this->translate('Status')?></th>
+		        </tr>
+		        <?php foreach ($this->data as $data): ?>
+		            <tr class='<?php echo $data->status ?>'>
+						<td><input type="checkbox" name="interested[]" value="<?php echo $data->cid . '-' . $data->uid ?>" id='user-<?php echo $data->uid ?>'/></td>
+		                <td><?php echo $data->uname?></td>
+		                <td><?php echo $this->date($data->date, true)?></td>
+		                <td><?php echo $data->coname?></td>
+		                <td><?php echo $data->cname?></td>
+						<td><?php echo $this->translate($data->status)?></td>
+		            </tr>
+                    <tr class='<?php echo $data->status ?>'>
+                        <td colspan="7">
+                            <strong><?php echo $this->translate('justify')?></strong>:
+                            <?php echo nl2br($data->justify)?>
+                        </td>
+                    </tr>
+		        <?php endforeach; ?>
+		    </table>
+            <br />
+			<div>
+				<input type="button" value=" <?php echo $this->translate('enroll students selected') ?> " id='matriculate' />
+				<input type="button" value=" <?php echo $this->translate('reject students selected') ?> " id='reject' />
+			</div>
+		</form>
+        <?php echo $this->paginationControl($this->data, null, null, $this->params); ?>
+    <?php else:?>
+        <p><?php echo $this->translate('there are no records')?></p>
+    <?php endif;?>
+</div>
+<script type="text/javascript">
+    $('#query').submit( function(){
+        this.action = this.action + '/query/' + $('input[type=text]').val();
+    });
+
+	$('input[type=button]').click( function(){
+		formAction = $('#pre-registration').attr('action');
+		formAction += this.id;
+		$('#pre-registration').attr('action', formAction).submit();
+    });
+
+	$('#course').change( function(){
+		$('#course-form').submit();
+	});
+
+     $('#user-all').click(function(){
+        if (this.checked == true) {
+            $('#pre-registration input[type="checkbox"]').attr('checked', true);
+        } else {
+            $('#pre-registration input[type="checkbox"]').attr('checked', false);
+        }
+    });
+
+    $('input[type=button], input[type=submit]').button();
+</script>

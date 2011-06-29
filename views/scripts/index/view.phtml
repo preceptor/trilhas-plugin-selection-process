@@ -1,0 +1,23 @@
+<?php if (count($this->data)): ?>
+    <div class="box">
+        <div class="header">
+            <h3><?php echo $this->translate('Selection process'); ?></h3>
+        </div>
+        <div class="courses content">
+            <table class="datatable">
+                <tr>
+                    <th><?php echo $this->translate('course')?></th>
+                    <th><?php echo $this->translate('Date')?></th>
+                    <th><?php echo $this->translate('Status')?></th>
+                </tr>
+                <?php foreach ($this->data as $data): ?>
+                    <tr>
+                        <td><?php echo $data->coname?></td>
+                        <td><?php echo $this->date($data->date, true)?></td>
+                        <td><?php echo $this->translate($data->status)?></td>
+                    </tr>
+                <?php endforeach; ?>
+        </table>
+        </div>
+    </div>
+<?php endif;?>
