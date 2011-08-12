@@ -76,6 +76,7 @@ class SelectionProcess_IndexController extends Tri_Controller_Action
 
 	public function signAction()
 	{
+        $this->_helper->layout->setLayout('solo');
 		$form    = new SelectionProcess_Form_PreRegister();
         $table   = new Tri_Db_Table('selection_process');
         $data    = $this->_getAllParams();
