@@ -1,9 +1,8 @@
 <div class="search">
     <div class='left'>
 		<form action="selection-process/index/index" method="get" id='query'>
-			<span class="ui-icon ui-icon-search magnifier"></span>
 	        <input type="text" name="query" value="<?php echo $this->params['query']?>" />
-	        <input type="submit" value="<?php echo $this->translate('Search')?>" />
+            <input type="submit" class="btn" value="<?php echo $this->translate('Search')?>" />
 	    </form>
 	</div>
 	<div style="margin-left:10px;" class='left'>
@@ -19,7 +18,7 @@
 <div>
     <?php if (count($this->data)): ?>
 		<form action="selection-process/index/" method="post" id='pre-registration'>
-			<table class="datatable">
+			<table>
 		        <tr>
 		            <th><input type="checkbox" id="user-all"/></th>
 		            <th><?php echo $this->translate('Name')?></th>
@@ -47,8 +46,8 @@
 		    </table>
             <br />
 			<div>
-				<input type="button" value=" <?php echo $this->translate('enroll students selected') ?> " id='matriculate' />
-				<input type="button" value=" <?php echo $this->translate('reject students selected') ?> " id='reject' />
+                <input type="button" class="btn" value=" <?php echo $this->translate('enroll students selected') ?> " id='matriculate' />
+				<input type="button" class="btn" value=" <?php echo $this->translate('reject students selected') ?> " id='reject' />
 			</div>
 		</form>
         <?php echo $this->paginationControl($this->data, null, null, $this->params); ?>
@@ -79,5 +78,5 @@
         }
     });
 
-    $('input[type=button], input[type=submit]').button();
+    
 </script>
