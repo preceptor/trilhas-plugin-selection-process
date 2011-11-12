@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <name>Selection process</name>
+    <description>Selection Process for new users</description>
+    <author>Preceptor Educação a Distância</author>
+    <version>1.0</version>
+    <license>GPL 3</license>
+    <keywords>selection, process</keywords>
+    <url>http://www.preceptoread.com.br</url>
+</configuration>
